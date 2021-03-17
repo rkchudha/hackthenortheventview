@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block custom_title %} <h2> {{event.name}} </h2> {% endblock %}
+
+
+{% block custom_content %}
+
+
+    <div class="row">
+        <div class="col-2"><img src="{{ url_for('static', filename='assets/day.png') }}" class="centered-img" alt="book-icon"></div>
+        <div class="col-8">
+            <div class="row"><h5>Date: {{event.weekday}} {{event.month_date}}</h5></div>
+            <div class="row"><h5>Time: {{event.start_time}} to {{event.end_time}}</h5></div>
+            <div class="row"><h5>Hosted by: {{event.host}}</h5></div>
+            <div class="row"><h5>Event Type: {{event.event_type}}</h5></div>
+            <br>
+            <div class="row"><h5>Description:</h5></div>
+            <div class="row text-left"><h6>{{event.description}}</h6></div>
+            <div class="row"><h5>Access event at: <a href={{event.private_url}}>{{event.private_url}}</a></h5></div>
+            <div class="row"><h5>Access event at: <a href={{event.public_url}}>{{event.public_url}}</a></h5></div>
+
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+
+{% endblock %}

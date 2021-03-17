@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+
+{% block custom_title %} <h1> Events </h1> {% endblock %}
+
+
+{% block custom_content %}
+
+
+    <!--SEARCH BAR-->
+    <form class="form-row" action="{{ url_for('search_request')}}", method="post", query="form.get.(query)">
+        <div class="form-group col-9">
+            <input class="form-control " name="query" placeholder="Search by events, hosts, descriptions">
+        </div>
+        <div class="form-group col-3">
+            <a href="{{ url_for('search_request') }}" type="button" class="btn btn-primary search-button">Search</a>
+        </div>
+    </form>
+
+    <h5> {{message}} <span class="search-query">{{query}}</span> </h5>
+
+    <!--LISTING THE EVENTS-->
+    {% for event in result %}
+    <a href="{{ url_for('search_result', id=event.id) }}">
+        <div class="result-box">
+            <div class="row align-items-center">
+                <div class="col-2 align-self-left container">
+                    <img src="{{ url_for('static', filename='assets/day.png') }}" class="centered-img" alt="date-icon">
+                    <div class="datecentered">{{ event.month_date}} <br> {{event.weekday}}</div>
+
+                </div>
+                <div class="col-7 text-left">
+                    <div><h5>{{ event.start_time }} to {{ event.end_time }}</h5></div>
+                    <div><h3>{{ event.name }}</h3></div>
+                    <div><p>{{ event.description[0:90] }}...</p></div>
+                </div>
+                <div class="col-3">
+                    <div><p>Hosted by: {{event.host}}</p></div>
+                    <div>
+                        <img src="{{ url_for('static', filename='assets/chevron.png') }}" class="chevron" alt="chevron">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+
+    <!--Testing sending raw data to page-->
+    <div class="row align-items-top" >
+        <div>
+            {% for event in result %}
+                <div>
+                    <p>{{ event }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+
+
+{% endblock %}
+
+
+
